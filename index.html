@@ -11,7 +11,7 @@
 		<link rel="stylesheet" href="style/print.css?2024-4-11-0" media="print" />
 		<link rel="stylesheet" href="style/style.css?2024-4-11-0" media="screen,print" />
 		<link rel="stylesheet" href="style/template.css?2024-4-11-0" media="screen" />
-		<link rel="stylesheet" href="pcss/index.css?2024-4-11-0-638876974824311515" media="screen,print" />
+		<link rel="stylesheet" href="pcss/index.css?2024-4-11-0-638877083001298770" media="screen,print" />
 		<script src="res/jquery.js?2024-4-11-0"></script>
 		<script src="res/x5engine.js?2024-4-11-0" data-files-version="2024-4-11-0"></script>
 		<script>
@@ -20,6 +20,32 @@
 			x5engine.boot.push(function () { x5engine.imPageToTop.initializeButton({}); });
 		</script>
 		
+		<script>
+		  document.getElementById('train-search-form').addEventListener('submit', async (e) => {
+		    e.preventDefault();
+		    const formData = new FormData(e.target);
+		    const query = new URLSearchParams(formData).toString();
+		    try {
+		      const response = await fetch('https://whimsical-pika-08b7fc.netlify.app/.netlify/functions/searchTrains?' + query);
+		      const trains = await response.json();
+		      const resultsDiv = document.getElementById('search-results');
+		      resultsDiv.innerHTML = trains.length ? trains.map(train => `
+		        <div class="train-result">
+		          <p>Treno ${train.TrainNumber}: ${train.DepartureTime} - ${train.ArrivalTime}</p>
+		          <p>Prezzo: €${train.Price}</p>
+		          <button onclick="bookTrain('${train.TrainNumber}')">Prenota</button>
+		        </div>
+		      `).join('') : '<p>Nessun treno trovato.</p>';
+		    } catch (error) {
+		      alert('Errore nella ricerca: ' + error.message);
+		    }
+		  });
+		
+		  function bookTrain(trainNumber) {
+		    alert(`Prenotazione per il treno ${trainNumber} avviata!`);
+		    // Qui puoi aggiungere il codice per il pagamento (es. Stripe)
+		  }
+		</script>
 	</head>
 	<body>
 		<div id="imPageExtContainer">
@@ -62,24 +88,26 @@
 						</div><div id="imPageRow_2" class="imPageRow">
 						<div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; overflow: hidden;"><div id="imPageRowGraphics_2" class="imContentDataContainer"></div></div>
 						</div>
-						<div id="imCell_4" class=""> <div id="imCellStyleGraphics_4"></div><div id="imCellStyleBorders_4"></div><div id="imHTMLObject_04" class="imHTMLObject" style="text-align: center; width: 100%; overflow: hidden;"><form id="train-search-form">
+						<div id="imCell_4" class=""> <div id="imCellStyleGraphics_4"></div><div id="imCellStyleBorders_4"></div><div id="imHTMLObject_04" class="imHTMLObject" style="text-align: center; width: 100%; overflow: hidden;"><form id="train-search-form" style="padding: 20px; max-width: 600px; margin: auto;">
 						  <label>Partenza</label>
-						  <select name="departure">
+						  <select name="departure" required>
 						    <option value="">Scegli</option>
 						    <option value="Roma Termini">Roma Termini</option>
 						    <option value="Milano Centrale">Milano Centrale</option>
+						    <option value="Napoli Centrale">Napoli Centrale</option>
 						  </select>
 						  <label>Arrivo</label>
-						  <select name="destination">
+						  <select name="destination" required>
 						    <option value="">Scegli</option>
 						    <option value="Roma Termini">Roma Termini</option>
 						    <option value="Milano Centrale">Milano Centrale</option>
+						    <option value="Napoli Centrale">Napoli Centrale</option>
 						  </select>
 						  <label>Data</label>
-						  <input type="date" name="departure_date">
-						  <button type="submit">Cerca</button>
+						  <input type="date" name="departure_date" required>
+						  <button type="submit" style="margin-top: 10px; padding: 10px; background-color: #d81c3f; color: white;">Cerca</button>
 						</form>
-						<div id="search-results"></div></div></div><div id="imCell_2" class=""> <div id="imCellStyleGraphics_2"></div><div id="imCellStyleBorders_2"></div><div id="imObjectImage_02"><div id="imObjectImage_02_container"><img src="images/Immagine-2025-07-06-030855.png" title="" alt="" width="588" height="368" />
+						<div id="search-results" style="padding: 20px; max-width: 600px; margin: auto;"></div></div></div><div id="imCell_2" class=""> <div id="imCellStyleGraphics_2"></div><div id="imCellStyleBorders_2"></div><div id="imObjectImage_02"><div id="imObjectImage_02_container"><img src="images/Immagine-2025-07-06-030855.png" title="" alt="" width="588" height="368" />
 						</div></div></div><div id="imPageRow_3" class="imPageRow">
 						
 						</div>

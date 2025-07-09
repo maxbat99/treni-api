@@ -166,7 +166,45 @@
 #imCellStyleGraphics_4 { grid-row: 1 / -1; grid-column: 1 / -1; background-color: transparent; }
 #imCellStyleBorders_4 { grid-row: 1 / -1; grid-column: 1 / -1; z-index: 2; }
 
-#imCell_2 { grid-template-columns: 100%; position: relative; box-sizing: border-box; }
+#train-search-form label {
+  display: block;
+  margin: 10px 0 5px;
+  font-weight: bold;
+}
+#train-search-form select, #train-search-form input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+#train-search-form button {
+  background-color: #d81c3f;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+#train-search-form button:hover {
+  background-color: #b01734;
+}
+.train-result {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 10px 0;
+  background-color: #f9f9f9;
+}
+.train-result button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.train-result button:hover {
+  background-color: #218838;
+}#imCell_2 { grid-template-columns: 100%; position: relative; box-sizing: border-box; }
 #imObjectImage_02 { position: relative; align-self: start; justify-self: center; max-width: 100%; box-sizing: border-box; z-index: 3; }
 #imCellStyleGraphics_2 { grid-row: 1 / -1; grid-column: 1 / -1; background-color: transparent; }
 #imCellStyleBorders_2 { grid-row: 1 / -1; grid-column: 1 / -1; z-index: 2; }
