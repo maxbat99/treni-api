@@ -1,0 +1,11 @@
+{
+  "name": "treni",
+  "version": "1.0.0",
+  "description": "Progetto WebSite X5 Evo",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Massimo",
+  "license": "MIT"
+}
